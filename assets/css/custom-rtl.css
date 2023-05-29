@@ -1,0 +1,72 @@
+/**** Custom RTL CSS *****/
+table.dataTable thead th, table.dataTable thead td {
+     padding: 10px 18px;
+}
+.invoiceimage, .invoicefont1, .invoicefont123, .rtl_pdf_prescription_img{
+	transform: scale(-1,1);
+}
+.main_div .width_1{
+	 width: auto !important;
+}
+.print_main_rtl_div.modal-body1 .invoiceimage{
+	transform: scale(-1,1);
+}
+.print_main_rtl_div{
+	position: relative;
+}
+.print_main_rtl_div #paitient_print
+{
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+.print_main_rtl_div .title_viewprint{
+	margin-top: 0px;
+}
+.invoice_entry_popup{
+	left: 20%;
+}
+#invoice_print .width_20_date{
+	float: left;
+}
+.rtl_div_table_invoice_50{
+	float: left !important;
+}
+#invoice_print .width_50{
+	direction: rtl;
+	float: right;
+}
+#invoice_print .width_30 , #invoice_print .width_20_date{
+	width: auto;
+}
+.prescription_pop_content .main_div.print_css_heading, .prescription_pop_content .modal-title {
+	direction: rtl;
+}
+.print_css_heading .width_20_prescription{
+	width: auto;
+	padding-top: 50px;
+}
+.checkbox input[type=checkbox]:checked::before{
+	margin: -.1875rem -.25rem 0 0 !important;
+}
+.width_60b2{
+	float: right;
+}
+.main_div.print_css_heading{
+	direction: rtl;
+}
+.width_40{
+	width: 100%;
+}
+.print_css_heading .width_20{
+	padding-top: 40px;
+	width: auto;
+}
+.modal-title {
+	direction: rtl;
+}
+.col-md-1.update_dp{
+	margin: 10px 0 0 60px;
+    text-align: center;
+    min-width: 255px;
+}
