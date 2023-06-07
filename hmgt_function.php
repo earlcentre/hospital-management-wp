@@ -18,39 +18,40 @@ function MJ_hmgt_change_menutitle($key)
 // GET OUTPATIENT LIST //
 function MJ_hmgt_get_outpatient_list_by_doctor($user_id)
 {
-	global $wpdb;
-	$table_inpatient_guardian = $wpdb->prefix."hmgt_inpatient_guardian";
-	$table_users = $wpdb->prefix."users";
-	$table_usermeta = $wpdb->prefix."usermeta";
-	$sql="SELECT u.* FROM $table_inpatient_guardian as gr,$table_users as u, $table_usermeta as um WHERE (gr.doctor_id = $user_id OR gr.inpatient_create_by = $user_id) AND gr.patient_id = u.id AND um.user_id= u.id AND um.meta_key= 'patient_type' AND um.meta_value= 'outpatient'";	
-	$patient=$wpdb->get_results($sql); 
-	
-	return $patient;
+    global $wpdb;
+    $table_users = $wpdb->prefix."users";
+    $table_usermeta = $wpdb->prefix."usermeta";
+    $sql = "SELECT u.* 
+            FROM $table_users AS u
+            INNER JOIN $table_usermeta AS um ON um.user_id = u.id
+            WHERE um.meta_key = 'patient_type' 
+                AND um.meta_value = 'outpatient'";
+    $patient = $wpdb->get_results($sql);
+    return $patient;
 }
+
 // GET OUTPATIENT LIST //
 function MJ_hmgt_get_outpatient_list_by_doctor_dashboard_outpatient($user_id)
 {
-	global $wpdb;
-	$table_inpatient_guardian = $wpdb->prefix."hmgt_inpatient_guardian";
-	$table_users = $wpdb->prefix."users";
-	$table_usermeta = $wpdb->prefix."usermeta";
-	$sql="SELECT u.* FROM $table_inpatient_guardian as gr,$table_users as u, $table_usermeta as um WHERE gr.doctor_id = $user_id AND gr.patient_id = u.id AND um.user_id= u.id AND um.meta_key= 'patient_type' AND um.meta_value= 'outpatient'";	
-	$patient=$wpdb->get_results($sql); 
-	//var_dump($patient);
-	return $patient;
-	
+    global $wpdb;
+    $table_users = $wpdb->prefix."users";
+    $table_usermeta = $wpdb->prefix."usermeta";
+    $sql = "SELECT u.* FROM $table_users AS u, $table_usermeta AS um WHERE u.id = um.user_id AND um.meta_key = 'patient_type' AND um.meta_value = 'outpatient'";
+    $patient = $wpdb->get_results($sql);
+    // var_dump($patient);
+    return $patient;
 }
+
 
 function MJ_hmgt_get_outpatient_list_by_doctor_dashboard_inpatient($user_id)
 {
-	global $wpdb;
-	$table_inpatient_guardian = $wpdb->prefix."hmgt_inpatient_guardian";
-	$table_users = $wpdb->prefix."users";
-	$table_usermeta = $wpdb->prefix."usermeta";
-	$sql="SELECT u.* FROM $table_inpatient_guardian as gr,$table_users as u, $table_usermeta as um WHERE gr.doctor_id = $user_id AND gr.patient_id = u.id AND um.user_id= u.id AND um.meta_key= 'patient_type' AND um.meta_value= 'inpatient'";	
-	$patient=$wpdb->get_results($sql); 
-	//var_dump($patient);
-	return $patient;
+    global $wpdb;
+    $table_users = $wpdb->prefix."users";
+    $table_usermeta = $wpdb->prefix."usermeta";
+    $sql = "SELECT u.* FROM $table_users AS u, $table_usermeta AS um WHERE u.id = um.user_id AND um.meta_key = 'patient_type' AND um.meta_value = 'inpatient'";
+    $patient = $wpdb->get_results($sql);
+    // var_dump($patient);
+    return $patient;
 }
 // UPDATE MESSAGE READ STATUS //
 function MJ_hmgt_change_read_status($id){
@@ -2894,7 +2895,7 @@ function MJ_hmgt_load_prescription_id_madicine()
 	
 die();	 
 }
-// GET APPLIYEDYED BAD //
+// GET APPLIYEDYED BED //
 function MJ_hmgt_get_appliyed_bad(){
 	
 	$allotment_date = $_REQUEST['allotment_date'];	
