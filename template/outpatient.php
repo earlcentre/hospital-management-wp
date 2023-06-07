@@ -809,9 +809,9 @@ jQuery(document).ready(function($) {
 				</div>
 				<div class="form-group">
 					<div class="mb-3 row">	
-						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-10 control-label form-label" for="zip_code"><?php esc_html_e('Zip Code','hospital_mgt');?><span class="require-field">*</span></label>
+						<label class="col-lg-2 col-md-2 col-sm-2 col-xs-10 control-label form-label" for="zip_code"><?php esc_html_e('Zip Code','hospital_mgt');?></label>
 						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 has-feedback">
-							<input id="zip_code" class="form-control  validate[required,custom[onlyLetterNumber]]" type="text" maxlength="15"  name="zip_code" 
+							<input id="zip_code" class="form-control" type="text" maxlength="15"  name="zip_code" 
 							value="<?php if($edit){ echo esc_attr($user_info->zip_code);}elseif(isset($_POST['zip_code'])) echo esc_attr($_POST['zip_code']);?>">
 						</div>
 					</div>
