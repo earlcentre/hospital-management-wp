@@ -581,38 +581,15 @@ jQuery(document).ready(function($) {
 							<option value=""><?php esc_html_e('Select Patient','hospital_mgt');?></option>
 							<?php 
 								$own_data=$user_access['own_data'];
-								if($own_data == '1')
-								{ 
-									if($obj_hospital->role == 'doctor') 
-									{
-										$get_doctor = get_current_user_id();
-										$patients =MJ_hmgt_get_patient_list_for_doctor($get_doctor);
-									}
-									else
-									{
-										$patients =$obj_hospital->patient;
-									}	
-									if(!empty($patients))
-									{
-										foreach($patients as $patient)
-										{
-											$patient_id = get_user_meta($patient->ID,'patient_id',true);
-											
-											echo '<option value="'.$patient->ID.'" '.selected($patient_id1,$patient->ID).'>'.$patient->display_name.' - '.$patient_id.'</option>';
-										
-										}
-									}
-								}
-								else
-								{
-									$patients = MJ_hmgt_patientid_list();
-									if(!empty($patients))
-									{
-										foreach($patients as $patient)
-										{
-											echo '<option value="'.$patient['id'].'" '.selected($patient_id1,$patient['id']).'>'.$patient['first_name'].' '.$patient['last_name'].' - '.$patient['patient_id'].'</option>';
-										
-										}
+								$patients = get_users(array(
+									'role' => 'patient',
+									'fields' => array('ID', 'display_name'),
+								));
+								
+								if(!empty($patients)) {
+									foreach($patients as $patient) {
+										$patient_id = get_user_meta($patient->ID, 'patient_id', true);
+										echo '<option value="'.$patient->ID.'" '.selected($patient_id1, $patient->ID).'>'.$patient->display_name.' - '.$patient_id.'</option>';
 									}
 								}
 							?>
