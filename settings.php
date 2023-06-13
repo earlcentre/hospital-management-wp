@@ -2354,7 +2354,7 @@ function MJ_hmgt_domain_load()
 	load_plugin_textdomain('hospital_mgt', false, dirname( plugin_basename( __FILE__ ) ). '/languages/');
 }
 //Patient registration function//
-function MJ_hmgt_registration_validation($patient_id,$first_name,$middle_name,$last_name,$gender,$birth_date,$blood_group,
+function MJ_hmgt_registration_validation($patient_id,$first_name,$middle_name,$last_name,$gender,$bp,$birth_date,$blood_group,
 		$symptoms,$diagnosis,$doctor,$address,$city_name,$state_name,$country_name,$zip_code,$phonecode,$mobile,$phone,$email,
 	$username,$password,$hmgt_user_avatar)  
 {
@@ -2436,10 +2436,10 @@ function MJ_hmgt_registration_validation($patient_id,$first_name,$middle_name,$l
 }	
 }
 //patient registration completed //
-function MJ_hmgt_complete_registration($patient_id,$first_name,$middle_name,$last_name,$gender,$birth_date,$blood_group,$symptoms,$diagnosis,$doctor,$address,$city_name,$state_name,$country_name,$zip_code,$phonecode,$mobile,$phone,$email,$username,$password,$hmgt_user_avatar) 
+function MJ_hmgt_complete_registration($patient_id,$first_name,$middle_name,$last_name,$gender,$bp,$birth_date,$blood_group,$symptoms,$diagnosis,$doctor,$address,$city_name,$state_name,$country_name,$zip_code,$phonecode,$mobile,$phone,$email,$username,$password,$hmgt_user_avatar) 
 {
     global $reg_errors;
-	 global $patient_id,$first_name,$middle_name,$last_name,$gender,$birth_date,$blood_group,$symptoms,$diagnosis,
+	 global $patient_id,$first_name,$middle_name,$last_name,$gender,$bp,$birth_date,$blood_group,$symptoms,$diagnosis,
 	$doctor,$address,$city_name,$state_name,$country_name,$zip_code,$phonecode,$mobile,$phone,$email,
 	$username,$password,$hmgt_user_avatar;
 	 $smgt_avatar = '';	
@@ -2516,6 +2516,7 @@ function MJ_hmgt_complete_registration($patient_id,$first_name,$middle_name,$las
 		$usermetadata=array('patient_id' => $patient_id,						
 						'middle_name'=>$middle_name,
 						'gender'=>$gender,
+						'bp'=>$bp,
 						'birth_date'=>$birth_date,
 						'address'=>$address,
 						'city_name'=>$city_name,
@@ -2618,7 +2619,7 @@ function MJ_hmgt_complete_registration($patient_id,$first_name,$middle_name,$las
 				exit;
 	}
 }
-function MJ_hmgt_registration_form($patient_id,$first_name,$middle_name,$last_name,$gender,$birth_date,$blood_group,$symptoms,$diagnosis,$doctor,$address,$city_name,$state_name,$country_name,$zip_code,$phonecode,$mobile,$phone,$email,$username,$password,$hmgt_user_avatar) 
+function MJ_hmgt_registration_form($patient_id,$first_name,$middle_name,$last_name,$gender,$bp,$birth_date,$blood_group,$symptoms,$diagnosis,$doctor,$address,$city_name,$state_name,$country_name,$zip_code,$phonecode,$mobile,$phone,$email,$username,$password,$hmgt_user_avatar) 
 {
 	if(isset($_REQUEST['registraion_status']))
 	{
@@ -2911,6 +2912,11 @@ function MJ_hmgt_registration_form($patient_id,$first_name,$middle_name,$last_na
 			      <input type="radio" value="female" class="tog" name="gender"  <?php  checked( 'female', $genderval);  ?>/><?php esc_html_e('Female','hospital_mgt');?> 
 			    </label>
 			</div>
+			<!-- BP lable & input -->
+			<label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label form-label" for="bp"><?php esc_html_e('BP','hospital_mgt');?></label>
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 has-feedback">
+							<input id="bp" class="form-control validate[custom[onlyLetter_specialcharacter]]" type="text" maxlength="50" value="<?php if($edit){ echo esc_attr($user_info->bp);}elseif(isset($_POST['bp'])) echo esc_attr($_POST['bp']);?>" name="bp">
+						</div>
 		</div>
 		
 		<div class="form-group">
@@ -3087,7 +3093,7 @@ function MJ_hmgt_registration_form($patient_id,$first_name,$middle_name,$last_na
 //patient registration fronted //
 function MJ_hmgt_patient_registration_function()
 {
-	global $patient_id,$first_name,$middle_name,$last_name,$gender,$birth_date,$blood_group,$symptoms,$diagnosis,
+	global $patient_id,$first_name,$middle_name,$last_name,$gender,$bp,$birth_date,$blood_group,$symptoms,$diagnosis,
 	$doctor,$address,$city_name,$state_name,$country_name,$zip_code,$phonecode,$mobile,$phone,$email,
 	$username,$password,$hmgt_user_avatar;
 	
@@ -3101,6 +3107,7 @@ function MJ_hmgt_patient_registration_function()
 		$_POST['middle_name'],
 		$_POST['last_name'],
 		$_POST['gender'],
+		$_POST['bp'],
 		MJ_hmgt_get_format_for_db($_POST['birth_date']),
 		$_POST['blood_group'],
 		$_POST['symptoms'],		
@@ -3122,7 +3129,7 @@ function MJ_hmgt_patient_registration_function()
         );        
 		 
         // sanitize user form input //
-        global $patient_id,$first_name,$middle_name,$last_name,$gender,$birth_date,$blood_group,$symptoms,$diagnosis,
+        global $patient_id,$first_name,$middle_name,$last_name,$gender,$bp,$birth_date,$blood_group,$symptoms,$diagnosis,
 	$doctor,$address,$city_name,$state_name,$country_name,$zip_code,$phonecode,$mobile,$phone,$email,
 	$username,$password,$hmgt_user_avatar;
         $patient_id =    $_POST['patient_id'] ;		
@@ -3130,6 +3137,7 @@ function MJ_hmgt_patient_registration_function()
 		$middle_name =   MJ_hmgt_strip_tags_and_stripslashes($_POST['middle_name']);
 		$last_name =  MJ_hmgt_strip_tags_and_stripslashes($_POST['last_name']);
 		$gender =   $_POST['gender'] ;
+		$bp = $_POST['bp'] ;
 		$birth_date =   MJ_hmgt_get_format_for_db($_POST['birth_date']);
 		$blood_group =   $_POST['blood_group'] ;
 		if(!empty($_POST['symptoms']))
@@ -3158,13 +3166,13 @@ function MJ_hmgt_patient_registration_function()
         // call @function complete_registration to create the user
         // only when no WP_error is found
         MJ_hmgt_complete_registration(
-       $patient_id,$first_name,$middle_name,$last_name,$gender,$birth_date,$blood_group,$symptoms,$diagnosis,
+       $patient_id,$first_name,$middle_name,$last_name,$gender,$bp,$birth_date,$blood_group,$symptoms,$diagnosis,
 	$doctor,$address,$city_name,$state_name,$country_name,$zip_code,$phonecode,$mobile,$phone,$email,
 	$username,$password,$hmgt_user_avatar);
     }
  
     MJ_hmgt_registration_form(
-      $patient_id,$first_name,$middle_name,$last_name,$gender,$birth_date,$blood_group,$symptoms,$diagnosis,
+      $patient_id,$first_name,$middle_name,$last_name,$gender,$bp,$birth_date,$blood_group,$symptoms,$diagnosis,
 	$doctor,$address,$city_name,$state_name,$country_name,$zip_code,$phonecode,$mobile,$phone,$email,
 	$username,$password,$hmgt_user_avatar);
 
