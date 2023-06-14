@@ -11,7 +11,24 @@ class MJ_hmgt_user
 	
 		if(isset($data['gender']))
 		$usermetadata['gender']=MJ_hmgt_strip_tags_and_stripslashes($data['gender']);
-	
+		
+		if(isset($data['bp']))
+		$usermetadata['bp']=MJ_hmgt_strip_tags_and_stripslashes($data['bp']);
+		if(isset($data['p']))
+		$usermetadata['p']=MJ_hmgt_strip_tags_and_stripslashes($data['p']);
+
+		if(isset($data['temp']))
+		$usermetadata['temp']=MJ_hmgt_strip_tags_and_stripslashes($data['temp']);
+
+		if(isset($data['wt']))
+		$usermetadata['wt']=MJ_hmgt_strip_tags_and_stripslashes($data['wt']);
+
+		if(isset($data['co']))
+		$usermetadata['co']=MJ_hmgt_strip_tags_and_stripslashes($data['co']);
+
+		if(isset($data['hpi']))
+		$usermetadata['hpi']=MJ_hmgt_strip_tags_and_stripslashes($data['hpi']);
+
 		if(isset($data['birth_date']))
 		$usermetadata['birth_date']=MJ_hmgt_get_format_for_db($data['birth_date']); 
 		

@@ -3659,6 +3659,7 @@ function MJ_hmgt_install_tables()
 			  `middle_name` varchar(100) NOT NULL,
 			  `last_name` varchar(100) NOT NULL,
 			  `gr_gender` varchar(50) NOT NULL,
+			  `bp` varchar(50) NOT NULL,
 			  `gr_address` varchar(200) NOT NULL,
 			  `gr_city` varchar(100) NOT NULL,
 			  `gr_state` varchar(100) NOT NULL,
