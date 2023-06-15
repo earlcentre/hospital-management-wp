@@ -71,6 +71,16 @@ if (isset($_REQUEST['page'])) {
 			buttonContainer: '<div class="dropdown" />'
 		});
 
+		$('#requests').multiselect({
+			nonSelectedText: '<?php esc_html_e('Select Lab Request', 'hospital_mgt'); ?>',
+			includeSelectAllOption: true,
+			selectAllText: '<?php esc_html_e('Select all', 'hospital_mgt'); ?>',
+			templates: {
+				button: '<button class="multiselect btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="multiselect-selected-text"></span><b class="caret"></b></button>',
+			},
+			buttonContainer: '<div class="dropdown" />'
+		});
+
 		$('#outpatient_list').DataTable({
 			"responsive": true,
 			"order": [
@@ -877,6 +887,75 @@ if (isset($_POST['save_outpatient'])) {
 						<h3><?php esc_html_e('Lab Request', 'hospital_mgt'); ?></h3>
 						<hr>
 					</div>
+					<!-- <div class="form-group">
+						<div class="mb-3 row">
+							<label class="col-sm-2 control-label form-label" for="requests"><?php esc_html_e('Lab Request', 'hospital_mgt'); ?></label>
+							<div class="col-sm-3 multiselect_validation_requests margin_bottom_5px">
+								<select class="form-control requests_list" multiple="multiple" name="requests[]" id="requests">
+									<?php
+									$requests_category = $user_object->MJ_hmgt_getPatientLabRequest();
+
+									if (!empty($requests_category)) {
+										foreach ($requests_category as $retrive_data) {
+											$requests_array = explode(",", $user_info->requests);
+									?>
+											<option value="<?php echo esc_attr($retrive_data->ID); ?>" <?php if (in_array($retrive_data->ID, $requests_array)) {
+																											echo 'selected';
+																										} ?>><?php echo esc_html($retrive_data->post_title); ?></option>
+									<?php
+										}
+									}
+									?>
+
+								</select>
+								<br>
+							</div>
+							<div class="col-sm-2"><button id="addremove" model="requests"><?php esc_html_e('Add Or Remove', 'hospital_mgt'); ?></button></div>
+						</div>
+					</div> -->
+					<div class="form-group">
+						<div class="mb-3 row">
+							<label class="col-sm-2 control-label form-label" for="requests"><?php esc_html_e('Lab Requests', 'hospital_mgt'); ?></label>
+							<div class="col-sm-3 multiselect_validation_requests margin_bottom_5px">
+								<select class="form-control requests_list" multiple="multiple" name="requests[]" id="requests">
+									<!--<option value=""><?php esc_html_e('Select Lab Requests', 'hospital_mgt'); ?></option>-->
+									<?php
+									$requests_category = $user_object->MJ_hmgt_getPatientRequests();
+
+									if (!empty($requests_category)) {
+										foreach ($requests_category as $retrive_data) {
+											$requests_array = explode(",", $user_info->requests);
+									?>
+											<option value="<?php echo esc_attr($retrive_data->ID); ?>" <?php if (in_array($retrive_data->ID, $requests_array)) {
+																											echo 'selected';
+																										} ?>><?php echo esc_html($retrive_data->post_title); ?></option>
+									<?php
+										}
+									}
+									?>
+								</select>
+								<br>
+							</div>
+							<div class="col-sm-2"><button id="addremove" model="requests"><?php esc_html_e('Add Or Remove', 'hospital_mgt'); ?></button></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="mb-3 row">
+							<label class="col-lg-2 col-md-2 col-sm-2 col-xs-10 control-label form-label" for="dx"><?php esc_html_e('DX', 'hospital_mgt'); ?></label>
+							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 has-feedback">
+								<input id="dx" class="form-control" type="text" maxlength="200" name="dx" value="<?php if ($edit) {
+																																													echo esc_attr($user_info->dx);
+																																												} elseif (isset($_POST['dx'])) echo esc_attr($_POST['dx']); ?>">
+							</div>
+							<label class="col-lg-2 col-md-2 col-sm-2 col-xs-10 control-label form-label" for="rx"><?php esc_html_e('RX', 'hospital_mgt'); ?></label>
+							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 has-feedback">
+								<input id="rx" class="form-control" type="text" maxlength="400" name="rx" value="<?php if ($edit) {
+																																													echo esc_attr($user_info->rx);
+																																												} elseif (isset($_POST['rx'])) echo esc_attr($_POST['rx']); ?>">
+							</div>
+						</div>
+					</div>
+
 					<div class="header">
 						<h3><?php esc_html_e('Login Information', 'hospital_mgt'); ?></h3>
 						<hr>

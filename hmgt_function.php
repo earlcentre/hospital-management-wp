@@ -1188,6 +1188,16 @@ function MJ_hmgt_select_symptoms()
 	die(); 
 	
 }
+
+// SELECT LAB REQUESTS //
+function MJ_hmgt_select_requests()
+{
+	$requests_post=get_post($_REQUEST['requests_id']);
+	echo $requests_post->post_title;
+	die(); 
+	
+}
+
 // ASSIGN INSTRUMENT PERIOD //
 function MJ_hmgt_instrument_assign_period()
 {
@@ -3050,6 +3060,16 @@ function MJ_hmgt_add_category_type($model)
 		$button_text=  esc_html__("Add",'hospital_mgt');
 		$label_text =  esc_html__("Symptoms",'hospital_mgt');
 	}
+
+	if($model == 'requests')
+	{
+		$user_object=new MJ_hmgt_user();
+		$cat_result =$user_object->MJ_hmgt_getPatientRequests();
+		$title = esc_html__("Lab Requests",'hospital_mgt');
+		$table_header_title =  esc_html__("Lab Requests",'hospital_mgt');
+		$button_text=  esc_html__("Add",'hospital_mgt');
+		$label_text =  esc_html__("Lab Requests",'hospital_mgt');
+	}
 	if($model == 'invoice_charge')
 	{
 		$obj_invoice= new MJ_hmgt_invoice();
@@ -3528,6 +3548,14 @@ function MJ_hmgt_remove_category()
 		$user_object->hmgtDeleteSymptoms($_POST['cat_id']);
 		die();
 	}
+
+	if($model == 'requests')
+	{
+		$user_object=new MJ_hmgt_user();
+		$user_object->hmgtDeleteRequests($_POST['cat_id']);
+		die();
+	}
+
 	if($model == 'invoice_charge')
 	{
 		$obj_invoice= new MJ_hmgt_invoice();
@@ -3609,6 +3637,15 @@ function MJ_hmgt_add_category()
 		$user_object->hmgtAddSymptoms($data);
 		$id = $wpdb->insert_id;
 	}
+
+	if($model == 'requests')
+	{
+		
+		$user_object=new MJ_hmgt_user();
+		$user_object->hmgtAddRequests($data);
+		$id = $wpdb->insert_id;
+	}
+
 	if($model == 'invoice_charge')
 	{
 		$obj_invoice= new MJ_hmgt_invoice();

@@ -29,6 +29,12 @@ class MJ_hmgt_user
 		if(isset($data['hpi']))
 		$usermetadata['hpi']=MJ_hmgt_strip_tags_and_stripslashes($data['hpi']);
 
+		if(isset($data['dx']))
+		$usermetadata['dx']=MJ_hmgt_strip_tags_and_stripslashes($data['dx']);
+
+		if(isset($data['rx']))
+		$usermetadata['rx']=MJ_hmgt_strip_tags_and_stripslashes($data['rx']);
+
 		if(isset($data['birth_date']))
 		$usermetadata['birth_date']=MJ_hmgt_get_format_for_db($data['birth_date']); 
 		
@@ -88,6 +94,8 @@ class MJ_hmgt_user
 			$usermetadata['blood_group']=MJ_hmgt_strip_tags_and_stripslashes($data['blood_group']);
 		    if(isset($data['symptoms']))
 				$usermetadata['symptoms']=implode(",",$data['symptoms']);
+			if(isset($data['requests']))
+				$usermetadata['requests']=implode(",",$data['requests']);
 			if(isset($data['patient_type']))
 			$usermetadata['patient_type']=MJ_hmgt_strip_tags_and_stripslashes($data['patient_type']);
 			
@@ -342,6 +350,16 @@ class MJ_hmgt_user
 					$result = get_posts( $args );
 		return $result;
 	}
+
+	// get patient lab requests
+
+	public function MJ_hmgt_getPatientRequests()
+	{
+		$args= array('post_type'=> 'requests','posts_per_page'=>-1,'orderby'=>'post_title','order'=>'Asc');
+					$result = get_posts( $args );
+		return $result;
+	}
+
 	//add symptoms data
 	public function hmgtAddSymptoms($data)
 	{
@@ -357,6 +375,24 @@ class MJ_hmgt_user
 		$result=wp_delete_post($symptoms_id);
 		return $result;
 	}
+	
+	// add lab requests data
+	public function hmgtAddRequests($data)
+	{
+		$result = wp_insert_post( array(
+						'post_status' => 'publish',
+						'post_type' => 'requests',
+						'post_title' => $data['category_name']) );
+			return $result;		
+	}
+
+	//delete lab requests data
+	public function hmgtDeleteRequests($requests_id)
+	{
+		$result=wp_delete_post($requests_id);
+		return $result;
+	}
+
 	public function add_discharge_data($data)
 	{
 		global $wpdb;
