@@ -94,8 +94,8 @@ class MJ_hmgt_user
 			$usermetadata['blood_group']=MJ_hmgt_strip_tags_and_stripslashes($data['blood_group']);
 		    if(isset($data['symptoms']))
 				$usermetadata['symptoms']=implode(",",$data['symptoms']);
-			if(isset($data['requests']))
-				$usermetadata['requests']=implode(",",$data['requests']);
+			// if(isset($data['requests']))
+			// 	$usermetadata['requests']=implode(",",$data['requests']);
 			if(isset($data['patient_type']))
 			$usermetadata['patient_type']=MJ_hmgt_strip_tags_and_stripslashes($data['patient_type']);
 			

@@ -71,15 +71,15 @@ if (isset($_REQUEST['page'])) {
 			buttonContainer: '<div class="dropdown" />'
 		});
 
-		$('#requests').multiselect({
-			nonSelectedText: '<?php esc_html_e('Select Lab Request', 'hospital_mgt'); ?>',
-			includeSelectAllOption: true,
-			selectAllText: '<?php esc_html_e('Select all', 'hospital_mgt'); ?>',
-			templates: {
-				button: '<button class="multiselect btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="multiselect-selected-text"></span><b class="caret"></b></button>',
-			},
-			buttonContainer: '<div class="dropdown" />'
-		});
+		// $('#requests').multiselect({
+		// 	nonSelectedText: '<?php esc_html_e('Select Lab Request', 'hospital_mgt'); ?>',
+		// 	includeSelectAllOption: true,
+		// 	selectAllText: '<?php esc_html_e('Select all', 'hospital_mgt'); ?>',
+		// 	templates: {
+		// 		button: '<button class="multiselect btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="multiselect-selected-text"></span><b class="caret"></b></button>',
+		// 	},
+		// 	buttonContainer: '<div class="dropdown" />'
+		// });
 
 		$('#outpatient_list').DataTable({
 			"responsive": true,
@@ -884,41 +884,15 @@ if (isset($_POST['save_outpatient'])) {
 						</div>
 					</div>
 					<div class="header">
-						<h3><?php esc_html_e('Lab Request', 'hospital_mgt'); ?></h3>
+						<h3><?php esc_html_e('RX, DX', 'hospital_mgt'); ?></h3>
 						<hr>
 					</div>
+					
 					<!-- <div class="form-group">
-						<div class="mb-3 row">
-							<label class="col-sm-2 control-label form-label" for="requests"><?php esc_html_e('Lab Request', 'hospital_mgt'); ?></label>
-							<div class="col-sm-3 multiselect_validation_requests margin_bottom_5px">
-								<select class="form-control requests_list" multiple="multiple" name="requests[]" id="requests">
-									<?php
-									$requests_category = $user_object->MJ_hmgt_getPatientLabRequest();
-
-									if (!empty($requests_category)) {
-										foreach ($requests_category as $retrive_data) {
-											$requests_array = explode(",", $user_info->requests);
-									?>
-											<option value="<?php echo esc_attr($retrive_data->ID); ?>" <?php if (in_array($retrive_data->ID, $requests_array)) {
-																											echo 'selected';
-																										} ?>><?php echo esc_html($retrive_data->post_title); ?></option>
-									<?php
-										}
-									}
-									?>
-
-								</select>
-								<br>
-							</div>
-							<div class="col-sm-2"><button id="addremove" model="requests"><?php esc_html_e('Add Or Remove', 'hospital_mgt'); ?></button></div>
-						</div>
-					</div> -->
-					<div class="form-group">
 						<div class="mb-3 row">
 							<label class="col-sm-2 control-label form-label" for="requests"><?php esc_html_e('Lab Requests', 'hospital_mgt'); ?></label>
 							<div class="col-sm-3 multiselect_validation_requests margin_bottom_5px">
 								<select class="form-control requests_list" multiple="multiple" name="requests[]" id="requests">
-									<!--<option value=""><?php esc_html_e('Select Lab Requests', 'hospital_mgt'); ?></option>-->
 									<?php
 									$requests_category = $user_object->MJ_hmgt_getPatientRequests();
 
@@ -938,7 +912,7 @@ if (isset($_POST['save_outpatient'])) {
 							</div>
 							<div class="col-sm-2"><button id="addremove" model="requests"><?php esc_html_e('Add Or Remove', 'hospital_mgt'); ?></button></div>
 						</div>
-					</div>
+					</div> -->
 					<div class="form-group">
 						<div class="mb-3 row">
 							<label class="col-lg-2 col-md-2 col-sm-2 col-xs-10 control-label form-label" for="dx"><?php esc_html_e('DX', 'hospital_mgt'); ?></label>
