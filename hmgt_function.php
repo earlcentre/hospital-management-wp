@@ -3041,7 +3041,7 @@ function MJ_hmgt_add_category_type($model)
 		$user_object=new MJ_hmgt_dignosis();
 		$cat_result =$user_object->MJ_hmgt_get_all_report_type();
 		$title = esc_html__("Diagnosis Report",'hospital_mgt');
-		$table_header_title =  esc_html__("Report Name",'hospital_mgt');
+		$table_header_title =  esc_html__("Lab Request Name",'hospital_mgt');
 		$table_header_amount =  esc_html__("Amount",'hospital_mgt');
 		$table_header_description =  esc_html__("Description",'hospital_mgt');
 		$table_header_tax =  esc_html__("Tax",'hospital_mgt');
@@ -3781,7 +3781,7 @@ function MJ_hmgt_patient_status_view()
 							if($obj_hospital->role == 'doctor')
 							{
 							?>		
-								<a  href="<?php echo $path1;?>" class="btn btn-success margin_bottom_5px"><?php esc_html_e('Prescribe New Report','hospital_mgt');?></a>
+								<a  href="<?php echo $path1;?>" class="btn btn-success margin_bottom_5px"><?php esc_html_e('Prescribe New Lab Request','hospital_mgt');?></a>
 							<?php
 							}
 							?>
@@ -10801,7 +10801,7 @@ function MJ_hmgt_uploads_dagnosisreport_table_formate()
 	{
 		$array_var ='<div class="form-group">
 			<div class="mb-3 row">			   
-				<label class="offset-sm-2 col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label form-label upload_document_text_align"  for="document">'.esc_html__('Report Name','hospital_mgt').'</label>
+				<label class="offset-sm-2 col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label form-label upload_document_text_align"  for="document">'.esc_html__('Lab Request Name','hospital_mgt').'</label>
 				<label class="col-sm-3 control-label form-label upload_document_text_align"  for="document">'.esc_html__('Upload Report','hospital_mgt').'</label>
 				<label class="col-sm-2 control-label form-label upload_document_text_align"  for="document">'.esc_html__('Amount','hospital_mgt').'('.MJ_hmgt_get_currency_symbol().')</label>
 			</div>	

@@ -237,6 +237,63 @@ if($active_tab == 'addoutpatient')
 					</div>
 				</div>
 			</div>
+			<div class="form-group">
+							<div class="mb-3 row">
+								<!-- BP label & input -->
+								<label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label form-label" for="bp"><?php esc_html_e('BP', 'hospital_mgt'); ?></label>
+								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 has-feedback">
+									<input id="bp" class="form-control" type="text" maxlength="50" value="<?php if ($edit) {
+																												echo esc_attr($user_info->bp);
+																											} elseif (isset($_POST['bp'])) echo esc_attr($_POST['bp']); ?>" name="bp">
+								</div>
+								<!-- p -->
+								<label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label form-label" for="p"><?php esc_html_e('P', 'hospital_mgt'); ?></label>
+								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 has-feedback">
+									<input id="p" class="form-control" type="text" maxlength="50" value="<?php if ($edit) {
+																												echo esc_attr($user_info->p);
+																											} elseif (isset($_POST['p'])) echo esc_attr($_POST['p']); ?>" name="p">
+								</div>
+							</div>
+						</div>
+
+						<!-- Temp & WT -->
+						<div class="form-group">
+							<div class="mb-3 row">
+								<!-- Temp lable & input -->
+								<label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label form-label" for="temp"><?php esc_html_e('Temp', 'hospital_mgt'); ?></label>
+								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 has-feedback">
+									<input id="temp" class="form-control" type="text" maxlength="50" value="<?php if ($edit) {
+																												echo esc_attr($user_info->temp);
+																											} elseif (isset($_POST['temp'])) echo esc_attr($_POST['temp']); ?>" name="temp">
+								</div>
+								<!-- WT lable & input -->
+								<label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label form-label" for="wt"><?php esc_html_e('WT', 'hospital_mgt'); ?></label>
+								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 has-feedback">
+									<input id="wt" class="form-control" type="text" maxlength="50" value="<?php if ($edit) {
+																												echo esc_attr($user_info->wt);
+																											} elseif (isset($_POST['wt'])) echo esc_attr($_POST['wt']); ?>" name="wt">
+								</div>
+							</div>
+						</div>
+						<!-- C/O & HPI -->
+						<div class="form-group">
+							<div class="mb-3 row">
+								<!-- C/O lable  & input -->
+								<label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label form-label" for="co"><?php esc_html_e('C/O', 'hospital_mgt'); ?></label>
+								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 has-feedback">
+									<input id="co" class="form-control" type="text" maxlength="200" value="<?php if ($edit) {
+																												echo esc_attr($user_info->co);
+																											} elseif (isset($_POST['co'])) echo esc_attr($_POST['co']); ?>" name="co">
+								</div>
+								<!-- HPI lable & input -->
+								<label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label form-label" for="hpi"><?php esc_html_e('HPI', 'hospital_mgt'); ?></label>
+								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 has-feedback">
+									<input id="hpi" class="form-control" type="text" maxlength="200" value="<?php if ($edit) {
+																												echo esc_attr($user_info->hpi);
+																											} elseif (isset($_POST['hpi'])) echo esc_attr($_POST['hpi']); ?>" name="hpi">
+								</div>
+							</div>
+						</div>
 			<div class="header">
 				<h3><?php esc_html_e('HomeTown Address Information','hospital_mgt');?></h3>
 				<hr>
